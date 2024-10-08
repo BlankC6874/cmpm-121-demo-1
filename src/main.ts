@@ -26,8 +26,25 @@ button.addEventListener("click", () => {
   counterDiv.innerHTML = `${counter} smiles`;
 });
 
-// Step 3: Automatic Clicking
-setInterval(() => {
-  counter++;
-  counterDiv.innerHTML = `${counter} smiles`;
-}, 1000);
+// Step 3: Automatic Clicking (with setInterval)
+// setInterval(() => {
+  // counter++;
+  // counterDiv.innerHTML = `${counter} smiles`;
+// }, 1000);
+
+// Step 4: Continuous Growth (with requestAnimationFrame)
+// as my understanding of the slides, since this method is enabled, the setInterval method should be disabled I guess?
+let lastTime = performance.now();
+
+function updateCounter(currentTime: number) {
+    const deltaTime = currentTime - lastTime;
+    lastTime = currentTime;
+
+    const increment = deltaTime / 1000; // 1 unit per second
+    counter += increment;
+    counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
+
+    requestAnimationFrame(updateCounter);
+}
+
+requestAnimationFrame(updateCounter);
