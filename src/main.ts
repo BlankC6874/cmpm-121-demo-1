@@ -25,3 +25,9 @@ button.addEventListener("click", () => {
   counter++;
   counterDiv.innerHTML = `${counter} smiles`;
 });
+
+// Step 3: Automatic Clicking
+setInterval(() => {
+    counter++;
+    counterDiv.innerHTML = `${counter} smiles`;
+}, 1000);
