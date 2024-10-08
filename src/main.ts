@@ -22,6 +22,6 @@ counterDiv.innerHTML = `${counter} smiles`;
 app.append(counterDiv);
 
 button.addEventListener("click", () => {
-    counter++;
-    counterDiv.innerHTML = `${counter} smiles`;
+  counter++;
+  counterDiv.innerHTML = `${counter} smiles`;
 });
