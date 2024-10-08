@@ -36,15 +36,47 @@ button.addEventListener("click", () => {
 // as my understanding of the slides, since this method is enabled, the setInterval method should be disabled I guess?
 let lastTime = performance.now();
 
+// function updateCounter(currentTime: number) {
+  // const deltaTime = currentTime - lastTime;
+  // lastTime = currentTime;
+
+  // const increment = deltaTime / 1000; // 1 unit per second
+  // counter += increment;
+  // counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
+
+  // requestAnimationFrame(updateCounter);
+// }
+
+// requestAnimationFrame(updateCounter);
+
+// Step 5: Purchasing an upgrade
+let growthRate = 0;
+
+const upgradeButton = document.createElement("button");
+upgradeButton.innerHTML = "Purchase Upgrade (10 smiles)";
+upgradeButton.disabled = true;
+app.append(upgradeButton);
+
+upgradeButton.addEventListener("click", () => {
+    if (counter >= 10) {
+        counter -= 10;
+        growthRate += 1;
+        counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
+        upgradeButton.disabled = counter < 10;
+    }
+});
+
 function updateCounter(currentTime: number) {
-  const deltaTime = currentTime - lastTime;
-  lastTime = currentTime;
+    const deltaTime = currentTime - lastTime;
+    lastTime = currentTime;
 
-  const increment = deltaTime / 1000; // 1 unit per second
-  counter += increment;
-  counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
+    const increment = (deltaTime / 1000) * growthRate; // growth rate units per second
+    counter += increment;
+    counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
 
-  requestAnimationFrame(updateCounter);
+    upgradeButton.disabled = counter < 10;
+
+    requestAnimationFrame(updateCounter);
 }
 
 requestAnimationFrame(updateCounter);
