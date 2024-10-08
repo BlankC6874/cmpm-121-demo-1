@@ -28,8 +28,8 @@ button.addEventListener("click", () => {
 
 // Step 3: Automatic Clicking (with setInterval)
 // setInterval(() => {
-  // counter++;
-  // counterDiv.innerHTML = `${counter} smiles`;
+// counter++;
+// counterDiv.innerHTML = `${counter} smiles`;
 // }, 1000);
 
 // Step 4: Continuous Growth (with requestAnimationFrame)
@@ -37,14 +37,14 @@ button.addEventListener("click", () => {
 let lastTime = performance.now();
 
 function updateCounter(currentTime: number) {
-    const deltaTime = currentTime - lastTime;
-    lastTime = currentTime;
+  const deltaTime = currentTime - lastTime;
+  lastTime = currentTime;
 
-    const increment = deltaTime / 1000; // 1 unit per second
-    counter += increment;
-    counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
+  const increment = deltaTime / 1000; // 1 unit per second
+  counter += increment;
+  counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
 
-    requestAnimationFrame(updateCounter);
+  requestAnimationFrame(updateCounter);
 }
 
 requestAnimationFrame(updateCounter);
