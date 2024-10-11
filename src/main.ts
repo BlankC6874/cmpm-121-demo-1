@@ -39,15 +39,18 @@ interface Upgrade {
   cost: number;
   rate: number;
   count: number;
+  description: string;
   updateButton?: HTMLButtonElement;
   updateCountDiv?: HTMLDivElement;
 }
 
 // create an array of upgrades
 const upgrades: Upgrade[] = [
-  { name: "Star Collector", baseCost: 10, cost: 10, rate: 0.1, count: 0 },
-  { name: "Galaxy Gatherer", baseCost: 100, cost: 100, rate: 2.0, count: 0 },
-  { name: "Universe Unifier", baseCost: 1000, cost: 1000, rate: 50, count: 0 },
+  { name: "Star Collector", baseCost: 10, cost: 10, rate: 0.1, count: 0, description: "Collects stars automatically." },
+  { name: "Galaxy Gatherer", baseCost: 100, cost: 100, rate: 2.0, count: 0, description: "Gathers galaxies for more stars." },
+  { name: "Universe Unifier", baseCost: 1000, cost: 1000, rate: 50, count: 0, description: "Unifies universes to produce stars exponentially." },
+  { name: "Nebula Navigator", baseCost: 5000, cost: 5000, rate: 200, count: 0, description: "Navigates nebulas to find hidden stars." },
+  { name: "Quasar Quester", baseCost: 20000, cost: 20000, rate: 1000, count: 0, description: "Quests through quasars to gather immense star power." },
 ];
 
 // create a div to display the growth rate
@@ -57,7 +60,7 @@ app.append(statusDiv);
 
 upgrades.forEach((upgrade) => {
   const upgradeButton = document.createElement("button");
-  upgradeButton.innerHTML = `Purchase ${upgrade.name} (${upgrade.cost.toFixed(2)} stars)`;
+  upgradeButton.innerHTML = `Purchase ${upgrade.name} (${upgrade.cost.toFixed(2)} stars) - ${upgrade.description}`;
   upgradeButton.disabled = true;
   app.append(upgradeButton);
 
@@ -74,7 +77,7 @@ upgrades.forEach((upgrade) => {
       counterDiv.innerHTML = `${counter.toFixed(2)} stars`;
       statusDiv.innerHTML = `Growth Rate: ${growthRate.toFixed(2)} stars/sec`;
       upgradeCountDiv.innerHTML = `${upgrade.name} count: ${upgrade.count}`;
-      upgradeButton.innerHTML = `Purchase ${upgrade.name} (${upgrade.cost.toFixed(2)} stars)`;
+      upgradeButton.innerHTML = `Purchase ${upgrade.name} (${upgrade.cost.toFixed(2)} stars) - ${upgrade.description}`;
       upgradeButton.disabled = counter < upgrade.cost;
     }
   });
