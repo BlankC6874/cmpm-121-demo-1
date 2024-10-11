@@ -46,11 +46,46 @@ interface Upgrade {
 
 // create an array of upgrades
 const upgrades: Upgrade[] = [
-  { name: "Star Collector", baseCost: 10, cost: 10, rate: 0.1, count: 0, description: "Collects stars automatically." },
-  { name: "Galaxy Gatherer", baseCost: 100, cost: 100, rate: 2.0, count: 0, description: "Gathers galaxies for more stars." },
-  { name: "Universe Unifier", baseCost: 1000, cost: 1000, rate: 50, count: 0, description: "Unifies universes to produce stars exponentially." },
-  { name: "Nebula Navigator", baseCost: 5000, cost: 5000, rate: 200, count: 0, description: "Navigates nebulas to find hidden stars." },
-  { name: "Quasar Quester", baseCost: 20000, cost: 20000, rate: 1000, count: 0, description: "Quests through quasars to gather immense star power." },
+  {
+    name: "Star Collector",
+    baseCost: 10,
+    cost: 10,
+    rate: 0.1,
+    count: 0,
+    description: "Collects stars automatically.",
+  },
+  {
+    name: "Galaxy Gatherer",
+    baseCost: 100,
+    cost: 100,
+    rate: 2.0,
+    count: 0,
+    description: "Gathers galaxies for more stars.",
+  },
+  {
+    name: "Universe Unifier",
+    baseCost: 1000,
+    cost: 1000,
+    rate: 50,
+    count: 0,
+    description: "Unifies universes to produce stars exponentially.",
+  },
+  {
+    name: "Nebula Navigator",
+    baseCost: 5000,
+    cost: 5000,
+    rate: 200,
+    count: 0,
+    description: "Navigates nebulas to find hidden stars.",
+  },
+  {
+    name: "Quasar Quester",
+    baseCost: 20000,
+    cost: 20000,
+    rate: 1000,
+    count: 0,
+    description: "Quests through quasars to gather immense star power.",
+  },
 ];
 
 // create a div to display the growth rate
