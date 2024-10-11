@@ -58,25 +58,25 @@ let growthRate = 0;
 // app.append(upgradeButton);
 
 // upgradeButton.addEventListener("click", () => {
-  // if (counter >= 10) {
-    // counter -= 10;
-    // growthRate += 1;
-    // counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
-    // upgradeButton.disabled = counter < 10;
-  // }
+// if (counter >= 10) {
+// counter -= 10;
+// growthRate += 1;
+// counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
+// upgradeButton.disabled = counter < 10;
+// }
 // });
 
 // function updateCounter(currentTime: number) {
-  // const deltaTime = currentTime - lastTime;
-  // lastTime = currentTime;
+// const deltaTime = currentTime - lastTime;
+// lastTime = currentTime;
 
-  // const increment = (deltaTime / 1000) * growthRate; // growth rate units per second
-  // counter += increment;
-  // counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
+// const increment = (deltaTime / 1000) * growthRate; // growth rate units per second
+// counter += increment;
+// counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
 
-  // upgradeButton.disabled = counter < 10;
+// upgradeButton.disabled = counter < 10;
 
-  // requestAnimationFrame(updateCounter);
+// requestAnimationFrame(updateCounter);
 // }
 
 // requestAnimationFrame(updateCounter);
