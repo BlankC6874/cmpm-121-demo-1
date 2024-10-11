@@ -52,19 +52,88 @@ let lastTime = performance.now();
 // Step 5: Purchasing an upgrade
 let growthRate = 0;
 
-const upgradeButton = document.createElement("button");
-upgradeButton.innerHTML = "Purchase Upgrade (10 smiles)";
-upgradeButton.disabled = true;
-app.append(upgradeButton);
+// const upgradeButton = document.createElement("button");
+// upgradeButton.innerHTML = "Purchase Upgrade (10 smiles)";
+// upgradeButton.disabled = true;
+// app.append(upgradeButton);
 
-upgradeButton.addEventListener("click", () => {
-  if (counter >= 10) {
-    counter -= 10;
-    growthRate += 1;
-    counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
-    upgradeButton.disabled = counter < 10;
-  }
+// upgradeButton.addEventListener("click", () => {
+  // if (counter >= 10) {
+    // counter -= 10;
+    // growthRate += 1;
+    // counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
+    // upgradeButton.disabled = counter < 10;
+  // }
+// });
+
+// function updateCounter(currentTime: number) {
+  // const deltaTime = currentTime - lastTime;
+  // lastTime = currentTime;
+
+  // const increment = (deltaTime / 1000) * growthRate; // growth rate units per second
+  // counter += increment;
+  // counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
+
+  // upgradeButton.disabled = counter < 10;
+
+  // requestAnimationFrame(updateCounter);
+// }
+
+// requestAnimationFrame(updateCounter);
+
+// Step 6: Multiple upgrades and status display
+interface Upgrade {
+  name: string;
+  cost: number;
+  rate: number;
+  count: number;
+  updateButton?: HTMLButtonElement;
+  updateCountDiv?: HTMLDivElement;
+}
+
+const upgrades: Upgrade[] = [
+  { name: "A", cost: 10, rate: 0.1, count: 0 },
+  { name: "B", cost: 100, rate: 2.0, count: 0 },
+  { name: "C", cost: 1000, rate: 50, count: 0 },
+];
+
+const statusDiv = document.createElement("div");
+statusDiv.innerHTML = `Growth Rate: ${growthRate.toFixed(2)} smiles/sec`;
+app.append(statusDiv);
+
+upgrades.forEach((upgrade) => {
+  const upgradeButton = document.createElement("button");
+  upgradeButton.innerHTML = `Purchase ${upgrade.name} (${upgrade.cost} smiles)`;
+  upgradeButton.disabled = true;
+  app.append(upgradeButton);
+
+  const upgradeCountDiv = document.createElement("div");
+  upgradeCountDiv.innerHTML = `${upgrade.name} count: ${upgrade.count}`;
+  app.append(upgradeCountDiv);
+
+  upgradeButton.addEventListener("click", () => {
+    if (counter >= upgrade.cost) {
+      counter -= upgrade.cost;
+      growthRate += upgrade.rate;
+      upgrade.count++;
+      counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
+      statusDiv.innerHTML = `Growth Rate: ${growthRate.toFixed(2)} smiles/sec`;
+      upgradeCountDiv.innerHTML = `${upgrade.name} count: ${upgrade.count}`;
+      upgradeButton.disabled = counter < upgrade.cost;
+    }
+  });
+
+  upgrade.updateButton = upgradeButton;
+  upgrade.updateCountDiv = upgradeCountDiv;
 });
+
+function updateUpgradeButtons() {
+  upgrades.forEach((upgrade) => {
+    if (upgrade.updateButton) {
+      upgrade.updateButton.disabled = counter < upgrade.cost;
+    }
+  });
+}
 
 function updateCounter(currentTime: number) {
   const deltaTime = currentTime - lastTime;
@@ -74,7 +143,7 @@ function updateCounter(currentTime: number) {
   counter += increment;
   counterDiv.innerHTML = `${counter.toFixed(2)} smiles`;
 
-  upgradeButton.disabled = counter < 10;
+  updateUpgradeButtons();
 
   requestAnimationFrame(updateCounter);
 }
