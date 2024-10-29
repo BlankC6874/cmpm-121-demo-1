@@ -27,7 +27,7 @@ app.append(counterDiv);
 // when the button is clicked, increment the counter by 1
 button.addEventListener("click", () => {
   counter++;
-  counterDiv.innerHTML = `${counter} stars`;
+  updateCounterDisplay();
 });
 
 let lastTime = performance.now();
@@ -95,6 +95,24 @@ const statusDiv = document.createElement("div");
 statusDiv.innerHTML = `Growth Rate: ${growthRate.toFixed(2)} stars/sec`;
 app.append(statusDiv);
 
+function updateCounterDisplay() {
+  counterDiv.innerHTML = `${counter.toFixed(2)} stars`;
+}
+
+function updateGrowthRateDisplay() {
+  statusDiv.innerHTML = `Growth Rate: ${growthRate.toFixed(2)} stars/sec`;
+}
+
+function updateUpgradeDisplay(upgrade: Upgrade) {
+  if (upgrade.updateCountDiv) {
+    upgrade.updateCountDiv.innerHTML = `${upgrade.name} count: ${upgrade.count}`;
+  }
+  if (upgrade.updateButton) {
+    upgrade.updateButton.innerHTML = `Purchase ${upgrade.name} (${upgrade.cost.toFixed(2)} stars) - ${upgrade.description}`;
+    upgrade.updateButton.disabled = counter < upgrade.cost;
+  }
+}
+
 function updateUpgradeButtons() {
   upgrades.forEach((upgrade) => {
     if (upgrade.updateButton) {
@@ -109,7 +127,7 @@ function updateCounter(currentTime: number) {
 
   const increment = (deltaTime / 1000) * growthRate; // growth rate units per second
   counter += increment;
-  counterDiv.innerHTML = `${counter.toFixed(2)} stars`;
+  updateCounterDisplay();
 
   updateUpgradeButtons();
 
@@ -131,12 +149,10 @@ upgrades.forEach((upgrade) => {
       counter -= upgrade.cost;
       upgrade.cost *= COST_MULTIPLIER; // Increase the cost by a factor of 1.15
       upgrade.count++;
-      counterDiv.innerHTML = `${counter.toFixed(2)} stars`;
       growthRate += upgrade.rate; // Update the growth rate
-      statusDiv.innerHTML = `Growth Rate: ${growthRate.toFixed(2)} stars/sec`;
-      upgradeCountDiv.innerHTML = `${upgrade.name} count: ${upgrade.count}`;
-      upgradeButton.innerHTML = `Purchase ${upgrade.name} (${upgrade.cost.toFixed(2)} stars) - ${upgrade.description}`;
-      upgradeButton.disabled = counter < upgrade.cost;
+      updateCounterDisplay();
+      updateGrowthRateDisplay();
+      updateUpgradeDisplay(upgrade);
     }
   });
 
