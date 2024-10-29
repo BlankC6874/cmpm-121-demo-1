@@ -93,6 +93,27 @@ const statusDiv = document.createElement("div");
 statusDiv.innerHTML = `Growth Rate: ${growthRate.toFixed(2)} stars/sec`;
 app.append(statusDiv);
 
+function updateUpgradeButtons() {
+  upgrades.forEach((upgrade) => {
+    if (upgrade.updateButton) {
+      upgrade.updateButton.disabled = counter < upgrade.cost;
+    }
+  });
+}
+
+function updateCounter(currentTime: number) {
+  const deltaTime = currentTime - lastTime;
+  lastTime = currentTime;
+
+  const increment = (deltaTime / 1000) * growthRate; // growth rate units per second
+  counter += increment;
+  counterDiv.innerHTML = `${counter.toFixed(2)} stars`;
+
+  updateUpgradeButtons();
+
+  requestAnimationFrame(updateCounter);
+}
+
 upgrades.forEach((upgrade) => {
   const upgradeButton = document.createElement("button");
   upgradeButton.innerHTML = `Purchase ${upgrade.name} (${upgrade.cost.toFixed(2)} stars) - ${upgrade.description}`;
@@ -120,26 +141,5 @@ upgrades.forEach((upgrade) => {
   upgrade.updateButton = upgradeButton;
   upgrade.updateCountDiv = upgradeCountDiv;
 });
-
-function updateUpgradeButtons() {
-  upgrades.forEach((upgrade) => {
-    if (upgrade.updateButton) {
-      upgrade.updateButton.disabled = counter < upgrade.cost;
-    }
-  });
-}
-
-function updateCounter(currentTime: number) {
-  const deltaTime = currentTime - lastTime;
-  lastTime = currentTime;
-
-  const increment = (deltaTime / 1000) * growthRate; // growth rate units per second
-  counter += increment;
-  counterDiv.innerHTML = `${counter.toFixed(2)} stars`;
-
-  updateUpgradeButtons();
-
-  requestAnimationFrame(updateCounter);
-}
 
 requestAnimationFrame(updateCounter);
