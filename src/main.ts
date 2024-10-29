@@ -1,5 +1,7 @@
 import "./style.css";
 
+const COST_MULTIPLIER = 1.15;
+
 const app: HTMLDivElement = document.querySelector("#app")!;
 
 const gameName = "My Stellar Game"; // Game Title
@@ -127,10 +129,10 @@ upgrades.forEach((upgrade) => {
   upgradeButton.addEventListener("click", () => {
     if (counter >= upgrade.cost) {
       counter -= upgrade.cost;
-      growthRate += upgrade.rate;
+      upgrade.cost *= COST_MULTIPLIER; // Increase the cost by a factor of 1.15
       upgrade.count++;
-      upgrade.cost *= 1.15; // Increase the cost by a factor of 1.15
       counterDiv.innerHTML = `${counter.toFixed(2)} stars`;
+      growthRate += upgrade.rate; // Update the growth rate
       statusDiv.innerHTML = `Growth Rate: ${growthRate.toFixed(2)} stars/sec`;
       upgradeCountDiv.innerHTML = `${upgrade.name} count: ${upgrade.count}`;
       upgradeButton.innerHTML = `Purchase ${upgrade.name} (${upgrade.cost.toFixed(2)} stars) - ${upgrade.description}`;
