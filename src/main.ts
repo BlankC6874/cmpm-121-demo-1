@@ -4,6 +4,15 @@ const COST_MULTIPLIER = 1.15;
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
+// Add this block to change the background color
+const style = document.createElement("style");
+style.innerHTML = `
+  body {
+    background-color: lightblue; /* Change this to your desired color */
+  }
+`;
+document.head.appendChild(style);
+
 const gameName = "My Stellar Game"; // Game Title
 document.title = gameName;
 
