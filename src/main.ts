@@ -4,11 +4,25 @@ const COST_MULTIPLIER = 1.15;
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
-// Add this block to change the background color
+// Add this block to change the background color and add font and animations
 const style = document.createElement("style");
 style.innerHTML = `
   body {
     background-color: lightblue; /* Change this to your desired color */
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3em;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
   }
 `;
 document.head.appendChild(style);
@@ -136,10 +150,9 @@ function updateCounter(currentTime: number) {
 
   const increment = (deltaTime / 1000) * growthRate; // growth rate units per second
   counter += increment;
+
   updateCounterDisplay();
-
   updateUpgradeButtons();
-
   requestAnimationFrame(updateCounter);
 }
 
